@@ -1,0 +1,49 @@
+/* Keep essential controls usable on scaled displays and short windows. */
+.now-panel { overflow-y: auto; scrollbar-gutter: stable; }
+.sidebar { min-height: 0; }
+.playlist-nav { flex-shrink: 1; }
+.import-zone { flex-shrink: 0; }
+.track-row:focus-visible { outline-offset: -2px; }
+.table-head span:nth-child(5), .row-duration { text-align: right; }
+.group-card:hover .group-art { outline: 1px solid #d8f39566; }
+.now-art img { user-select: none; -webkit-user-drag: none; }
+@media (max-height: 690px) {
+  .hero { height: 205px; }
+  .hero h1 { font-size: 25px; margin: 9px 0 7px; }
+  .hero-copy { padding-top: 16px; }
+  .hero-actions { margin-top: 11px; }
+  .hero-actions .button { height: 29px; }
+  .hero-art { transform: scale(.72); transform-origin: right 20%; }
+  .hero-footer { height: 22px; }
+  .library-section { margin-top: 18px; }
+  .section-heading { margin-bottom: 12px; }
+  .now-panel { padding-top: 14px; }
+  .panel-heading { margin-bottom: 5px; }
+  .cover-stage { max-width: 155px; padding-bottom: 12px; }
+  .now-title-row h2 { font-size: 17px; }
+  .now-info { margin-top: 5px; }
+  .signal-line { height: 15px; margin: 7px 0 3px; flex-shrink: 0; }
+  .panel-tabs button { padding-top: 7px; padding-bottom: 9px; }
+  .song-info { padding-top: 12px; }
+  .song-info>div { margin-bottom: 10px; }
+  .panel-footnote { display: none; }
+  .sidebar { padding-top: 20px; padding-bottom: 12px; }
+  .brand { margin-bottom: 25px; }
+  .nav-label { margin-bottom: 10px; }
+  .playlist-label { margin-top: 15px; margin-bottom: 5px; }
+  .sidebar-bottom { margin-top: 12px; }
+}
+@media (max-width: 1000px) {
+  .app-shell { grid-template-columns: 168px minmax(360px, 1fr) 230px; }
+  .row-album, .table-head span:nth-child(3) { display: none; }
+  .table-head, .track-row { grid-template-columns: 20px minmax(130px,1fr) 34px 32px 48px; }
+  .hero-detail { display: none; }
+  .hero-art { right: -15px; }
+  .player { grid-template-columns: 150px minmax(205px,1fr) 120px; gap: 9px; }
+  .player-tools input { width: 35px; }
+  .player-track strong { max-width: 90px; }
+}
+.mini .app-shell { display: block; }
+.mini .player { grid-template-columns: 1fr 1fr; }
+.immersive .app-shell { grid-template-columns: 1fr; }
+.immersive .now-panel { overflow: visible; }

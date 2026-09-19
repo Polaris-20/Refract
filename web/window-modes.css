@@ -1,0 +1,7 @@
+.mode-switching .app-shell { pointer-events: none; }
+.mode-switching .exit-immersive { pointer-events: none; }
+#mini-immersive { display: none; }
+.mini #mini-immersive { display: inline-flex; }
+.immersive .exit-immersive { right: 24px; top: 20px; }
+.immersive .now-panel.show-lyrics { height: min(650px,calc(100vh - 180px)); }
+@media (max-height:690px) { .immersive .now-panel.show-lyrics { height: calc(100vh - 155px); } }

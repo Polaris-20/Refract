@@ -1,0 +1,72 @@
+/* Windows DWM supplies the live desktop blur beneath this transparent surface. */
+html { background: transparent; }
+body.desktop-glass {
+  --glass-shade: .17;
+  --muted: #afbbb4;
+  background: rgba(11, 18, 17, var(--glass-shade));
+}
+.desktop-glass .ambient {
+  background: radial-gradient(ellipse at 70% 0%, #e6f3c50d, transparent 60%);
+}
+.desktop-glass .sidebar {
+  background: linear-gradient(160deg, #13211b38, #0e191730);
+  border-right-color: #f1ffe81f;
+}
+.desktop-glass .main { background: #0c171010; }
+.desktop-glass .topbar { background: #edf8db03; border-bottom-color: #e5f5d81c; }
+.desktop-glass .now-panel { background: linear-gradient(160deg,#eaffdd0b,#101b180a); border-left-color: #e7f9df20; }
+.desktop-glass .hero {
+  background: linear-gradient(118deg,#b6d19a13,#23382016 48%,#d6e4b615);
+  border-color: #f1ffe32a;
+  box-shadow: inset 0 1px 0 #f5ffe321, inset 1px 0 0 #fbffeb0b, 0 12px 34px #030c0815;
+}
+.desktop-glass .hero:before { opacity: .10; }
+.desktop-glass .hero p, .desktop-glass .hero-detail { color: #c0cbb4; }
+.desktop-glass .hero-footer { color: #b1c09e; }
+.desktop-glass .glass {
+  background: linear-gradient(125deg,#edffdd25,#d4e2cc10 42%,#d7f5b724);
+  border-color: #efffe247;
+  box-shadow: inset 0 1px 0 #fff8, inset 1px 0 0 #ffffff21, inset 0 -1px 0 #ffffff29, 0 15px 35px #07100c35;
+  backdrop-filter: blur(24px) saturate(120%);
+}
+.desktop-glass .player { background-color: #111e1944; }
+.desktop-glass .player:after {
+  content: ''; position: absolute; z-index: -1; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(ellipse at 14% 0%,#ffffff18,transparent 38%),radial-gradient(ellipse at 90% 100%,#d8ffbc12,transparent 35%);
+}
+.desktop-glass .dialog, .desktop-glass .context-menu { background-color: #18251dec; }
+.desktop-glass .toast { background-color: #1b2a22ee; }
+.desktop-glass .search { background: #0d1b1333; border-color: #edffe519; }
+.desktop-glass .track-row:hover { background: #efffdf0c; }
+.desktop-glass .track-row.selected { background: linear-gradient(90deg,#e7ffbf18,#efffc307); }
+.desktop-glass .table-head { color: #afbea6; border-color: #e5fbd120; }
+.desktop-glass .row-album, .desktop-glass .row-song small, .desktop-glass .row-duration { color: #adbea3; }
+.desktop-glass .nav-item { color: #b9c8bd; }
+.desktop-glass .nav-item.active { color: #e5ffb2; background: #d8f39518; }
+.desktop-glass .now-info p, .desktop-glass .song-info strong { color: #c2d0b7; }
+.desktop-glass .song-info>div>span, .desktop-glass .panel-tabs button { color: #a5b798; }
+.desktop-glass .panel-tabs button.active { color: #e4efd9; }
+.desktop-glass .library-footer { color: #9bac90; }
+.desktop-glass .nav-label, .desktop-glass .playlist-hint, .desktop-glass .import-zone small { color: #9aaf96; }
+.desktop-glass .player-track span, .desktop-glass .progress span { color: #b6c6a5; }
+.desktop-glass .panel-footnote { color: #8b9f7f; }
+.desktop-glass .exit-immersive { background-color: #1a271d80; }
+.desktop-glass .icon-button { color: #b5c6b7; }
+.desktop-glass .format-tag { color: #c8ddb2; border-color: #d2f1a549; }
+.glass-controls { margin-bottom: 21px; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+.glass-controls .setting-row { padding-bottom: 13px; border-bottom: 0; }
+.glass-modes { display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 4px; padding: 4px; margin-bottom: 17px; border: 1px solid var(--line); border-radius: 10px; background: #080f1138; }
+.glass-modes button { min-width: 0; min-height: 34px; padding: 7px 6px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); background: transparent; font: inherit; font-size: 11px; white-space: nowrap; cursor: pointer; }
+.glass-modes button:hover { background: #efffdf0c; }
+.glass-modes button[aria-pressed="true"] { color: var(--accent, #d8f395); border-color: #d8f39542; background: #d8f39516; box-shadow: inset 0 1px 0 #ffffff10; }
+.glass-modes button:focus-visible { outline: 2px solid var(--accent, #d8f395); outline-offset: 2px; }
+.glass-modes button:disabled { opacity: .45; cursor: default; }
+.glass-controls .glass-depth-label { margin-top: 7px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; }
+.glass-depth-label span { font-size: 10px; }
+.glass-depth-label output { color: #d8f395; font: 10px Consolas,monospace; }
+.glass-controls input[type=range] { width: 100%; margin-top: 14px; height: 4px; }
+.glass-depth-extents { display: flex; justify-content: space-between; color: #8fa17c; font-size: 9px; margin-top: 9px; }
+.glass-status { font-size: 9px; color: #9eaf91; line-height: 1.7; margin: 13px 0 0; }
+.desktop-glass.immersive .ambient { opacity: .15; background: radial-gradient(ellipse at 50% 30%,var(--tint),transparent 70%); }
+.desktop-glass.mini .player { background-color: #15241c30; }
+.desktop-glass .cover-stage { filter: drop-shadow(0 9px 20px #03090618); }

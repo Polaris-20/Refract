@@ -1,0 +1,15 @@
+using Refract;
+int count = 0;
+foreach (string mode in new[] { "off", "focused", "always" })
+foreach (bool low in new[] { false, true })
+foreach (bool supported in new[] { false, true })
+foreach (bool highContrast in new[] { false, true })
+{
+    bool eligible = GlassPolicy.Eligible(mode, low, supported, highContrast);
+    // Attaching the material is independent of input focus. DWM animates its inactive state.
+    bool expected = mode != "off" && !low && supported && !highContrast;
+    if (eligible != expected) throw new Exception($"Policy mismatch: {mode}/{low}/{supported}/{highContrast}");
+    count++;
+}
+if (GlassPolicy.Normalize(null) != "focused" || GlassPolicy.Normalize("invalid") != "focused") throw new Exception("Invalid mode fallback");
+Console.WriteLine($"PASS {count} glass policy combinations and invalid input fallback; no windows created.");

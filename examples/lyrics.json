@@ -1,0 +1,21 @@
+{
+  "timeUnit": "s",
+  "lines": [
+    {
+      "time": 1,
+      "end": 3,
+      "text": "风从窗边经过",
+      "translation": "The breeze passes the window"
+    },
+    {
+      "time": 5.5,
+      "end": 8,
+      "text": "把夜色留给声音"
+    },
+    {
+      "time": 10,
+      "end": 13,
+      "text": "沿着微光向前"
+    }
+  ]
+}

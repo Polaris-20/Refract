@@ -1,0 +1,25 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(require('node:path').join(__dirname,'../web/app.js'),'utf8');
+const nodes=new Map();const $=s=>{if(!nodes.has(s))nodes.set(s,{innerHTML:'',textContent:''});return nodes.get(s);};
+const state={tracks:['a','b','c','d','e'].map(id=>({id,title:id})),queue:['a','b','c'],current:'a',upcoming:[],history:[],shuffle:false,repeat:0};
+let plays=[];const ctx={state,$,track:id=>state.tracks.find(t=>t.id===id),escapeHtml:s=>s,notify(){},syncNextPreload(){},updateTransport(){},shuffled:a=>a.slice().reverse(),audio:{pause(){}},play:async id=>{plays.push(id);state.current=id;}};
+vm.createContext(ctx);vm.runInContext(source.slice(source.indexOf('function renderQueue(){'),source.indexOf('let queueDragId='))+source.slice(source.indexOf('function peekNext('),source.indexOf('function syncNextPreload('))+source.slice(source.indexOf('async function next('),source.indexOf('async function previous(')),ctx);
+ctx.enqueue('c',true);assert.deepEqual(Array.from(state.queue),['a','c','b']);
+(async()=>{
+  await ctx.next();assert.equal(state.current,'c');
+  ctx.enqueue('d');ctx.enqueue('d');assert.equal(state.queue.filter(x=>x==='d').length,1);
+  ctx.removeQueue('b');assert(!state.queue.includes('b'));assert(state.tracks.some(x=>x.id==='b'));
+  ctx.removeQueue('c');assert(state.queue.includes('c'));
+  state.shuffle=true;state.upcoming=['a','d'];ctx.enqueue('e',true);await ctx.next();assert.equal(state.current,'e');
+  ctx.moveQueue('d','a');assert.equal(state.shuffle,false);assert.equal(state.queue[0],'d');assert.equal(state.upcoming.length,0);
+  ctx.moveQueue('d','c',true);assert.equal(state.queue.indexOf('d'),state.queue.indexOf('c')+1);
+  ctx.clearOtherQueue();assert.deepEqual(Array.from(state.queue),['e']);assert.equal(state.tracks.length,5);
+  state.tracks.find(t=>t.id==='b').missing=true;assert.throws(()=>ctx.enqueue('b'));
+  console.log('PASS queue: next playback, shuffle priority, append deduplication, remove preservation, protect current, drag ordering, shuffle exit, clear others, missing files');
+  const {palette,fallback}=require('../web/cover-colors.js');
+  assert.deepEqual(palette(new Uint8ClampedArray([0,0,0,255,255,255,255,255,120,120,120,255])),fallback);
+  assert.deepEqual(palette(new Uint8ClampedArray([255,0,0,0])),fallback);
+  const red=palette(new Uint8ClampedArray(Array.from({length:100},()=>[220,20,30,255]).flat()));assert(red.accent[0]>red.accent[1]);assert(Math.min(...red.accent)>140);
+  const blue=palette(new Uint8ClampedArray(Array.from({length:100},()=>[20,30,230,255]).flat()));assert(blue.accent[2]>blue.accent[0]);
+  console.log('PASS cover colors: black/white fallback, transparency rejection, red/blue extraction, readable light accents');
+})().catch(e=>{console.error(e);process.exitCode=1;});

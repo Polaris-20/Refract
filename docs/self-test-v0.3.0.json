@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "imports WAV metadata",
+      "passed": true
+    },
+    {
+      "name": "deduplicates file paths",
+      "passed": true
+    },
+    {
+      "name": "library edits leave source untouched",
+      "passed": true
+    },
+    {
+      "name": "metadata persists after reopening library",
+      "passed": true
+    },
+    {
+      "name": "UTF8 BOM lyrics imported",
+      "passed": true
+    },
+    {
+      "name": "lyrics survive original removal and library reopen",
+      "passed": true
+    },
+    {
+      "name": "library snapshot excludes lyrics body",
+      "passed": true
+    },
+    {
+      "name": "GB18030 lyrics decode",
+      "passed": true
+    },
+    {
+      "name": "UTF16 BOM lyrics decode",
+      "passed": true
+    },
+    {
+      "name": "empty import preserves existing lyrics",
+      "passed": true
+    },
+    {
+      "name": "oversized import preserves existing lyrics",
+      "passed": true
+    },
+    {
+      "name": "lyrics import leaves source music untouched",
+      "passed": true
+    },
+    {
+      "name": "writeback creates byte-exact original backup",
+      "passed": true
+    },
+    {
+      "name": "written metadata readable from source",
+      "passed": true
+    },
+    {
+      "name": "writeback preserves duration",
+      "passed": true
+    },
+    {
+      "name": "corrupt music reports per-file error",
+      "passed": true
+    },
+    {
+      "name": "range stream respects bounds",
+      "passed": true
+    },
+    {
+      "name": "range stream can seek",
+      "passed": true
+    },
+    {
+      "name": "unreadable library is preserved with visible warning",
+      "passed": true
+    }
+  ]
+}

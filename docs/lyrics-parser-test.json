@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "BOM CRLF and decimal precision",
+      "passed": true
+    },
+    {
+      "name": "multiple timestamps sort correctly",
+      "passed": true
+    },
+    {
+      "name": "same timestamp combines translations without repeats",
+      "passed": true
+    },
+    {
+      "name": "positive offset advances and negative delays",
+      "passed": true
+    },
+    {
+      "name": "offset preserves order before zero",
+      "passed": true
+    },
+    {
+      "name": "metadata is excluded and plain LRC remains readable",
+      "passed": true
+    },
+    {
+      "name": "TXT leaves all text literal",
+      "passed": true
+    },
+    {
+      "name": "empty timestamps retain instrumental gap",
+      "passed": true
+    },
+    {
+      "name": "active index handles prelude exact boundary and backwards seek",
+      "passed": true
+    },
+    {
+      "name": "malformed timestamp is plain text",
+      "passed": true
+    },
+    {
+      "name": "enhanced LRC retains words with line timing",
+      "passed": true
+    },
+    {
+      "name": "HTML remains literal",
+      "passed": true
+    },
+    {
+      "name": "excessive expanded timestamps are bounded",
+      "passed": true
+    }
+  ]
+}

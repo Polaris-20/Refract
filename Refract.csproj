@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Refract</AssemblyName>
+    <Version>0.9.1</Version>
+    <Description>A quiet place for your music.</Description>
+    <ApplicationIcon>web\assets\refract.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <TargetPlatformDisplayName>Windows</TargetPlatformDisplayName>
+    <TargetPlatformMoniker>Windows,Version=7.0</TargetPlatformMoniker>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" />
+    <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    <Content Include="web\**\*" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="RemoveUnusedWpfWebView" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup><Reference Remove="@(Reference)" Condition="$([System.String]::Copy('%(Reference.Identity)').Contains('Microsoft.Web.WebView2.Wpf'))" /></ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://media.refract.local data:; media-src 'self' https://media.refract.local blob:; connect-src 'self' https://media.refract.local; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <title>折光 · REFRACT</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="responsive.css"><link rel="stylesheet" href="desktop-glass.css"><link rel="stylesheet" href="lyrics.css"><script src="lyrics-parser.js" defer></script><link rel="stylesheet" href="spectrum.css"><script src="audio-engine.js" defer></script><script src="spectrum.js" defer></script><link rel="stylesheet" href="window-modes.css"><link rel="stylesheet" href="personalization.css"><script src="cover-colors.js" defer></script><link rel="stylesheet" href="transitions.css"><script src="app.js" defer></script>
+</head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="m5 6 10 6-10 6z" fill="currentColor" stroke="none"/><path d="M18 5v14"/></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><path d="m19 6-10 6 10 6z" fill="currentColor" stroke="none"/><path d="M6 5v14"/></symbol>
+<symbol id="i-library" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="16" rx="1"/><path d="M14 4h6v16h-6zM6 8h2M16 8h2"/></symbol>
+<symbol id="i-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M6 12a6 6 0 0 1 6-6"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 5c-2-2-6-1-8 2-2-3-6-4-8-2-5 5 4 12 8 15 4-3 13-10 8-15Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h7l2 3h9v11H3z"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="m5 15-1 5 5-1L20 8l-4-4ZM13 7l4 4"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 9l5 6m0-6-5 6"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M5 8h13l-3-3m3 3-3 3M19 16H6l3 3m-3-3 3-3M3 12V8m18 4v4"/></symbol>
+<symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 3M3 18h3c2 0 4-3 5-6m3-3c1-2 2-3 4-3h3m-4-3 4 3-4 4"/></symbol>
+<symbol id="i-mini" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M12 12h7v5h-7z"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h1m-1 6h1m-1 6h1"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-3a8 8 0 0 1 16 0v3"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M9 17V5l11-2v12M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></symbol>
+</defs></svg>
+<div class="ambient" aria-hidden="true"></div>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="折光首页"><span class="brand-mark">◭</span><span>REFRACT<small>折 光 · 本 地 音 乐</small></span></a>
+    <div class="nav-label">YOUR SPACE <span>01 /</span></div>
+    <nav id="navigation" aria-label="音乐导航">
+      <button class="nav-item active" data-view="all"><svg><use href="#i-library"/></svg>我的音乐<span id="nav-count">0</span></button>
+      <button class="nav-item" data-view="albums"><svg><use href="#i-disc"/></svg>专辑</button>
+      <button class="nav-item" data-view="artists"><svg><use href="#i-person"/></svg>歌手</button>
+      <button class="nav-item" data-view="favorites"><svg><use href="#i-heart"/></svg>喜欢的音乐</button>
+    </nav>
+    <div class="nav-label playlist-label">COLLECTIONS <button id="new-playlist" class="icon-button" title="新建歌单" aria-label="新建歌单"><svg><use href="#i-plus"/></svg></button></div>
+    <div id="playlists" class="playlist-nav"><span class="playlist-hint">为某个时刻，留一张歌单。</span></div>
+    <button class="import-zone" id="sidebar-import"><span class="import-zone-icon"><svg><use href="#i-plus"/></svg></span><strong>带上你的音乐</strong><small>导入歌曲 · 留在本地</small><span class="tiny-corner">↗</span></button>
+    <div class="sidebar-bottom"><span><i class="status-dot"></i> LOCAL & PERSONAL</span><button id="settings" class="icon-button" title="外观与关于" aria-label="外观与关于"><svg><use href="#i-settings"/></svg></button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">私人声场 <span>/</span> <strong id="breadcrumb">我的音乐</strong></div><label class="search"><svg><use href="#i-search"/></svg><input id="search" placeholder="搜索音乐、歌手、专辑" aria-label="搜索音乐、歌手、专辑"><kbd>Ctrl K</kbd></label><button id="import" class="button import-button"><svg><use href="#i-plus"/></svg>导入音乐</button><button id="folder-import" class="icon-button folder-button" title="导入文件夹" aria-label="导入文件夹"><svg><use href="#i-folder"/></svg></button></header>
+    <div class="content-scroll">
+      <section class="hero" id="hero">
+        <div class="hero-copy"><div class="eyebrow"><span class="crosshair">+</span> A QUIET PLACE FOR YOUR MUSIC</div><h1>把世界调成<br>你的<span>频率。</span></h1><p>喜欢的声音，值得一个专属空间。</p><div class="hero-actions"><button class="button primary" id="hero-play"><svg><use href="#i-play"/></svg><span>试听折光</span></button><span class="hero-detail" id="hero-detail">三段原创声景，感受一下。</span></div></div>
+        <div class="hero-art" aria-hidden="true"><div class="orb-halo"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orb"><div class="orb-core"></div><div class="orb-shine"></div><span class="orb-line"></span></div><div class="art-guide horizontal"></div><div class="art-guide vertical"></div><span class="art-coordinate">35° 41′ N<br>139° 41′ E</span><div class="art-tag"><span class="status-dot"></span> SOUND, IN A NEW LIGHT.<small>REFRACT — SOUND STUDIES / 001</small></div><span class="art-cross">+</span></div>
+        <div class="hero-footer"><span>EST. 2026</span><span>听见。然后，留住。</span><span class="barcode">▎▏▌▏▎▍▏▌▎▏▍</span></div>
+      </section>
+      <section class="library-section"><div class="section-heading"><div><span class="eyebrow section-eyebrow">THE COLLECTION</span><h2 id="view-title">我的音乐 <span id="track-count">00</span></h2></div><div class="library-tools"><button id="play-all" class="button subtle"><svg><use href="#i-play"/></svg>播放全部</button><select id="sort" aria-label="排序"><option value="added">最近加入</option><option value="title">标题 A–Z</option><option value="artist">歌手 A–Z</option><option value="album">专辑 / 曲号</option></select></div></div>
+      <div id="track-table" class="track-table"><div class="table-head"><span>#</span><span>标题 / 歌手</span><span>专辑</span><span>格式</span><span>时长</span><span></span></div><div id="track-list"></div></div>
+      <div id="empty-state" class="empty-state"><span class="empty-symbol">↳</span><div><strong>你的音乐，从这里开始。</strong><p>拖入音乐文件，或点击右上角导入。MP3 / FLAC / WAV / M4A 等格式。</p></div><button id="load-demo" class="text-button">先听听示例 <span>↗</span></button></div>
+      <div id="group-grid" class="group-grid" hidden></div>
+      <footer class="library-footer"><span id="library-summary">0 首音乐 · 等待你的第一个声音</span><span>每一种频率，都有归处。 <b>↗</b></span></footer></section>
+    </div>
+  </main>
+  <aside class="now-panel"><div class="panel-heading"><span class="eyebrow">ON AIR <i class="status-dot"></i></span><button id="immersive" class="icon-button" title="沉浸模式（F11）" aria-label="沉浸模式"><svg><use href="#i-expand"/></svg></button></div><div class="cover-stage"><div class="cover-shadow"></div><div class="now-art" id="now-art"><span class="default-cover">R<span>REFRACT<br>SOUND ARCHIVE</span></span></div><div class="cover-corner top-left"></div><div class="cover-corner bottom-right"></div></div><div class="now-info"><span class="now-catalog" id="now-catalog">REFRACT / 000</span><div class="now-title-row"><h2 id="now-title">等待一个好声音</h2><button id="now-favorite" class="icon-button" title="喜欢这首歌" aria-label="喜欢这首歌" disabled><svg><use href="#i-heart"/></svg></button></div><p id="now-artist">你的私人声场，即将开启。</p><div class="spectrum-immersive" title="实时频谱 · 从左到右为低频到高频"><canvas class="spectrum-canvas" role="img" aria-label="实时音频频谱，左侧低频，右侧高频"></canvas></div></div><div class="signal-line spectrum" title="实时频谱 · 从左到右为低频到高频"><canvas class="spectrum-canvas" role="img" aria-label="实时音频频谱，左侧低频，右侧高频"></canvas></div><div class="panel-tabs"><button class="active" data-panel="info">歌曲信息</button><button data-panel="lyrics">歌词</button><button data-panel="queue">播放队列 <span id="queue-count">0</span></button></div><div id="song-info" class="song-info"><div><span>专辑</span><strong id="info-album">—</strong></div><div><span>年份 / 流派</span><strong id="info-year">—</strong></div><div><span>音频</span><strong id="info-quality">—</strong></div><button id="edit-current" class="button edit-button" disabled><svg><use href="#i-edit"/></svg>编辑歌曲信息<small>↗</small></button></div><section id="lyrics-panel" class="lyrics-panel" aria-label="当前歌曲歌词" title="将一个 LRC、SRT、JSON 或 TXT 文件拖到这里，导入到当前歌曲" hidden><div class="lyrics-drop-hint" aria-hidden="true"><strong id="lyrics-drop-title">松手，为这首歌导入歌词</strong><span id="lyrics-drop-song"></span><small>LRC / SRT / JSON / TXT · 一次一个文件</small></div><div class="lyrics-toolbar"><span id="lyrics-kind">LYRICS / LOCAL</span><button id="import-lyrics" class="text-button" disabled>导入歌词 ↗</button></div><p id="lyrics-source" class="lyrics-source"></p><div id="lyrics-scroll" class="lyrics-scroll" tabindex="0" aria-label="歌词，时间轴歌词可点击跳转"><p class="lyrics-empty">给声音，添上文字。<small>支持 LRC / SRT / JSON / TXT<br>拖到这里即可导入</small></p></div><p id="lyrics-hint" class="lyrics-hint">可拖入歌词文件 · 随这首歌保存在本地</p></section><div id="queue" class="queue" hidden></div><div class="panel-footnote"><span>OWN YOUR MUSIC.</span><span>KEEP YOUR MOMENTS.</span><b>R /</b></div></aside>
+  <footer class="player glass"><div class="player-track"><div id="player-art" class="player-art"><svg><use href="#i-note"/></svg></div><div><strong id="player-title">还没有正在播放的音乐</strong><span id="player-artist">让声音进来。</span></div><button id="player-favorite" class="icon-button" aria-label="收藏正在播放的歌曲" title="收藏" disabled><svg><use href="#i-heart"/></svg></button></div><div class="transport"><div class="transport-buttons"><button id="shuffle" class="icon-button" aria-label="随机播放" title="随机播放"><svg><use href="#i-shuffle"/></svg></button><button id="previous" class="icon-button" aria-label="上一首" title="上一首"><svg><use href="#i-prev"/></svg></button><button id="toggle-play" class="play-button" aria-label="播放" title="播放 / 暂停（空格）"><svg><use href="#i-play"/></svg></button><button id="next" class="icon-button" aria-label="下一首" title="下一首"><svg><use href="#i-next"/></svg></button><button id="repeat" class="icon-button" aria-label="顺序播放" title="播放模式：顺序"><svg><use href="#i-repeat"/></svg><span id="repeat-one" hidden>1</span></button></div><div class="progress"><span id="elapsed">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="播放进度" disabled><span id="duration">0:00</span></div></div><div class="player-tools"><span class="playing-label" id="playing-label">STANDBY</span><button id="mute" class="icon-button" title="静音" aria-label="静音"><svg><use href="#i-volume"/></svg></button><input id="volume" type="range" min="0" max="100" value="65" aria-label="音量"><span class="tool-divider"></span><button id="mini" class="icon-button" title="迷你播放器 / 退出迷你" aria-label="迷你播放器"><svg><use href="#i-mini"/></svg></button><button id="mini-immersive" class="icon-button" title="沉浸模式（F11）" aria-label="进入沉浸模式"><svg><use href="#i-expand"/></svg></button></div></footer>
+</div>
+<button id="exit-immersive" title="退出沉浸（Esc / F11）" class="button glass exit-immersive" hidden><svg><use href="#i-close"/></svg>退出沉浸</button>
+<div id="drop-overlay" class="drop-overlay" hidden><div><svg><use href="#i-import"/></svg><h2>松手，让音乐进来。</h2><p>音乐文件会保留在原来的位置。</p></div></div>
+<div id="toast" class="toast glass" role="status" hidden></div>
+<div id="busy" class="busy" role="status" hidden><span></span><strong>正在整理你的音乐…</strong><small>读取封面与歌曲信息</small></div>
+<dialog id="editor" class="dialog glass"><form id="edit-form"><div class="dialog-heading"><div><span class="eyebrow">MAKE IT YOURS / METADATA</span><h2>给声音一个名字。</h2></div><button type="button" class="icon-button" data-close="editor" aria-label="关闭编辑"><svg><use href="#i-close"/></svg></button></div><div class="editor-intro"><div id="editor-cover" class="editor-cover"></div><div><strong id="editor-file"></strong><p>整理标题、歌手和封面，让音乐回到你喜欢的样子。</p><button type="button" id="change-cover" class="text-button">更换封面 ↗</button><small>封面选择后立即保存到曲库</small></div></div><div class="form-grid"><label>歌曲标题<input name="title" required maxlength="500"></label><label>歌手<input name="artist" maxlength="500"></label><label class="full">专辑<input name="album" maxlength="500"></label><label>发行年份<input name="year" type="number" min="0" max="9999"></label><label>曲目序号<input name="number" type="number" min="0" max="9999"></label><label class="full">流派<input name="genre" maxlength="500"></label></div><div class="editor-note"><i class="status-dot"></i> 保存到本地曲库。原音乐文件保持原样。</div><div class="dialog-actions"><button type="button" id="write-tags" class="button subtle" title="先保存编辑，再写回原文件；写入前会备份">写回音乐文件…</button><div><button type="button" class="button subtle" data-close="editor">取消</button><button type="submit" class="button primary">保存信息 <span>↗</span></button></div></div></form></dialog>
+<dialog id="playlist-dialog" class="dialog small-dialog glass"><form id="playlist-form"><div class="dialog-heading"><div><span class="eyebrow">A COLLECTION OF MOMENTS</span><h2>新建歌单</h2></div><button type="button" class="icon-button" data-close="playlist-dialog" aria-label="关闭"><svg><use href="#i-close"/></svg></button></div><label>为这一刻取个名字<input name="name" placeholder="例如：凌晨两点的回程" required maxlength="100"></label><div class="dialog-actions"><span></span><button class="button primary" type="submit">创建歌单 ↗</button></div></form></dialog>
+<dialog id="add-to-dialog" class="dialog small-dialog glass"><div class="dialog-heading"><h2>加入歌单</h2><button class="icon-button" data-close="add-to-dialog" aria-label="关闭"><svg><use href="#i-close"/></svg></button></div><div id="add-to-options"></div></dialog>
+<dialog id="settings-dialog" class="dialog small-dialog glass"><div class="dialog-heading"><div><span class="eyebrow">REFRACT / 0.9.1</span><h2>保持轻盈。</h2></div><button class="icon-button" data-close="settings-dialog" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div><section class="glass-controls" aria-label="桌面玻璃设置">
+<div class="setting-row"><span>桌面液态玻璃<small>透出窗口后面的桌面与应用</small></span></div>
+<div id="desktop-glass" class="glass-modes" role="group" aria-label="桌面液态玻璃模式">
+<button type="button" data-glass-mode="off" aria-pressed="false">关闭</button>
+<button type="button" data-glass-mode="focused" aria-pressed="true">聚焦时启动</button>
+<button type="button" data-glass-mode="always" aria-pressed="false">保持</button>
+</div>
+<label class="glass-depth-label" for="glass-depth"><span>玻璃深浅</span><output id="glass-depth-value">18%</output></label>
+<input id="glass-depth" type="range" min="0" max="60" value="18" aria-label="玻璃深浅">
+<div class="glass-depth-extents"><span>通透</span><span>深色</span></div>
+<p id="glass-status" class="glass-status" role="status">正在连接桌面玻璃…</p>
+</section><label class="setting-row"><span>跟随封面配色<small>高光、歌词与频谱随专辑改变颜色</small></span><input id="cover-colors" type="checkbox" role="switch" checked></label>
+<section class="song-transitions" aria-label="歌曲过渡">
+<label class="setting-row"><span>歌曲平滑过渡<small>上一首淡出，下一首渐渐进入</small></span><input id="crossfade-enabled" type="checkbox" role="switch" checked></label>
+<div class="lyric-size-row"><label for="crossfade-seconds">过渡时长</label><input id="crossfade-seconds" type="range" min="1" max="12" value="4"><output id="crossfade-value">4 秒</output></div>
+<p id="crossfade-status">自动切歌按设定时长过渡；手动切歌使用短淡化。单曲循环保留原来的首尾。</p>
+</section><section class="desktop-lyrics-options" aria-label="桌面悬浮歌词">
+<label class="setting-row"><span>桌面悬浮歌词<small>最小化播放器后也能看歌词</small></span><input id="desktop-lyrics-enabled" type="checkbox" role="switch"></label>
+<label class="setting-row"><span>锁定并穿透鼠标<small>需要移动时，在这里解锁</small></span><input id="desktop-lyrics-locked" type="checkbox" role="switch"></label>
+<div class="lyric-size-row"><label for="desktop-lyrics-size">字号</label><input id="desktop-lyrics-size" type="range" min="20" max="44" value="28"><output id="desktop-lyrics-size-value">28</output></div>
+<button id="desktop-lyrics-reset" class="text-button">找回歌词窗口 ↗</button><p id="desktop-lyrics-status">解锁时拖动歌词可移动；右上角可锁定或隐藏。同步歌词显示当前句与下一句，双语优先显示译文。</p>
+</section><label class="setting-row"><span>动态频谱<small>随音乐跳动 · 轻量视觉下暂停动画</small></span><input id="spectrum-enabled" type="checkbox" role="switch" checked></label><label class="setting-row"><span>轻量视觉<small>暂停桌面玻璃、背景模糊与氛围动画</small></span><input id="low-effects" type="checkbox" role="switch"></label><div class="about-copy"><p>折光，一间只属于你的音乐舱。</p><p>本地播放 · 本地整理 · 无需账户</p><p>快捷键：空格 播放 / 暂停<br>Ctrl K 搜索 · Ctrl O 导入<br>← / → 快退 / 快进 5 秒<br>Esc 退出沉浸模式</p><small>播放支持取决于系统解码能力。支持导入 LRC / SRT / JSON / TXT 歌词，暂不包含批量编辑和无缝播放。桌面毛玻璃由 Windows 合成，高光和玻璃边缘由界面绘制；尚不包含物理折射。</small></div></dialog>
+<div id="context-menu" class="context-menu glass" hidden></div>
+<audio id="audio" preload="metadata" crossorigin="anonymous"></audio><audio id="audio-next" preload="auto" crossorigin="anonymous"></audio>
+</body></html>
