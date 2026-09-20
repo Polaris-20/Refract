@@ -76,3 +76,7 @@ dotnet run
 应用代码使用 [MIT](LICENSE)，项目原创音频与图形为 CC0-1.0。TagLibSharp 和 WebView2 保留各自许可，见 [第三方说明](THIRD_PARTY_NOTICES.md)。
 
 本项目为独立创作，不隶属于任何音乐平台或游戏公司。
+
+
+
+为难以寻找歌词而感到烦恼吗？不妨试试TigerSHe的Moss-Transcribe-WebUI吧！
